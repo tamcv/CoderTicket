@@ -1,0 +1,28 @@
+<div class="row" style="padding-top:83px">
+    <%= form_for :event,url: events_path,method: :post,:html => {class: "form-signin "} do |e|  %>
+        <%= e.label :name %>
+        <%= e.text_field :name ,class:"form-control" %>
+        </br>
+        <%= e.label :starts_at %>
+        <%= e.text_field :starts_at ,class:"form-control",type:"date" %>
+        </br>
+        <%= e.label :ends_at %>
+        <%= e.text_field :ends_at,class:"form-control",type: "date" %>
+        </br>
+        <%= e.label :hero_image_url %>
+        <%= e.text_field :hero_image_url,class:"form-control" %>
+        </br>
+        <%= e.label :extended_html_description %>
+        <%= e.text_field :extended_html_description,class:"form-control" %>
+        </br>
+        <%= e.label :venue_id %>
+        <%= e.select(:venue_id,options_from_collection_for_select(@venues,"id","name"),{},{class:"form-control"}) %>
+        </br>
+        <%= e.label :category_id %>
+        <%= e.select(:category_id,options_from_collection_for_select(@categories,"id","name"),{},{class:"form-control"}) %>
+        <div class="text-xs-center" style="padding-top:30px">
+          <%= e.submit "Create Event", class: "btn btn-success btn-lg" %>
+        </div>
+    <% end %>
+</div>
+

@@ -17,3 +17,12 @@ body {
   border: 2px solid rgb(241, 112, 91);
 }
 
+.form-signin {
+  max-width: 330px;
+  padding: 60px;
+  margin: 0 auto;
+}
+
+.form-signin .form-signin-heading, .form-signin .checkbox {
+  margin-bottom: 10px;
+}

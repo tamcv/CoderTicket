@@ -6,6 +6,8 @@
     </form>
   </div>
 </div>
+
+<% if @events %>
 <div class="container-fluid events-list">
     <% @events.in_groups_of(3) do |g| %>
       <div class="row">
@@ -16,3 +18,4 @@
     <% end %>
   </div>
 </div>
+<%end %>
