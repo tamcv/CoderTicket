@@ -55,13 +55,13 @@ ActiveRecord::Schema.define(version: 20161031184235) do
   end
 
   create_table "tickets", force: :cascade do |t|
-    t.integer  "count"
     t.integer  "ticket_type_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.string   "name"
     t.string   "address"
     t.string   "phone"
+    t.integer  "count"
     t.index ["ticket_type_id"], name: "index_tickets_on_ticket_type_id", using: :btree
   end
 

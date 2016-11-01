@@ -21,8 +21,7 @@ class TicketsController < ApplicationController
 
   private
   def ticket_params
-    byebug
-    params.require(:ticket).permit!
+    params.permit(:name,:address,:count,:ticket_type_id)
   end
 
 end
