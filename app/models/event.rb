@@ -10,6 +10,7 @@ class Event < ActiveRecord::Base
   def self.upcoming
     where("starts_at > (?) and publish = true",Time.now)
   end
+  
   def upcoming?
     starts_at > Time.now && self.publish
   end

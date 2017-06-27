@@ -1,4 +1,6 @@
 class EventsController < ApplicationController
+  before_action :check_event_changing_permission, only: [:edit]
+
   def index
     if params[:search].nil? || params[:search].blank?
       @events = Event.upcoming
@@ -19,7 +21,7 @@ class EventsController < ApplicationController
   end
 
   def event_list
-    @events = current_user.events.where(publish:false)
+    @events = current_user.events
   end
 
   def create
@@ -31,14 +33,33 @@ class EventsController < ApplicationController
     end
   end
 
+  def edit
+    @event = Event.find(params[:id])
+    @categories = Category.all
+    @venues = Venue.all
+  end
+
+  def update
+    @event = Event.find(params[:id])
+    if @event.update_attributes(event_params)
+      flash[:success] = "Event updated!"
+      redirect_to mines_events_path
+    else
+      render 'edit'
+    end
+  end
+  
   def show
     @event = Event.find(params[:id])
   end
 
   def new
-
     @categories = Category.all
     @venues = Venue.all
+  end
+
+  def check_event_changing_permission
+    
   end
 
   private

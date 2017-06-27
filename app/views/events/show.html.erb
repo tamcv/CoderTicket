@@ -23,7 +23,6 @@
         <% end %>
       </div>
     </div>
-
     <div class="col-md-9 event-content">
       <div class="hero-img hidden-sm-down" style="background-image: url(<%= @event.hero_image_url %>); background-size: cover;"> </div>
       <div class="container">
@@ -53,6 +52,7 @@
           <%= @event.extended_html_description.html_safe %>
         </div>
 
-      </div>  
+      </div>
+      <%= link_to "Edit", edit_event_path(id: params[:id]), class: "btn btn-info show"%>
     </div>
 </div>
