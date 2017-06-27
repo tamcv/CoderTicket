@@ -1,0 +1,13 @@
+<%= form_for @venue do |f| %>
+    <h2 class="form-signin-heading">Create Venue</h2>
+    <%= f.label :name,nil, class:"sr-only" %>
+    <%= f.text_field :name, class: "form-control", placeholder: "Name" %>
+    </br>
+    <%= f.label :full_address ,nil, class:"sr-only" %>
+    <%= f.text_field :full_address, class: "form-control", placeholder: "Full address" %>
+    </br>
+    <%= f.label :region_id, nil, class:"sr-only"  %>
+    <%= f.select :region_id, Region.all.collect { |p| [ p.name, p.id ] }, class: "form-control" %>
+    <br>
+    <%= f.submit "Create" ,class:"btn btn-lg btn-primary btn-block"%>
+<% end %>

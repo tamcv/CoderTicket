@@ -27,15 +27,22 @@
         <li class="nav-item">
           <%= link_to "Your Event",mines_events_path,class:"nav-link" ,method: :get %>
         </li>
+        <li class="nav-item" style="float: right">
+          <a class="nav-link" href="<%= new_event_path %>">Create Event</a>
+        </li>
+        <li class="nav-item" style="float: right">
+          <a class="nav-link" href="<%= new_venue_path %>">Create Venue</a>
+        </li>
     <% end %>
-
-
-
-    <li class="nav-item" style="float: right">
-      <a class="nav-link" href="<%= new_event_path %>">Create Event</a>
-    </li>
   </ul>
 </nav>
+
+<% flash.each do |type, message| %>
+  <div class="alert <%= bootstrap_class_for(type) %> show">
+    <button class="close" data-dismiss="alert">×</button>
+    <%= message %>
+  </div>
+<% end %>
 
 <%= yield %>
 

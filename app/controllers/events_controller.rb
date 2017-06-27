@@ -5,7 +5,6 @@ class EventsController < ApplicationController
     else
       @events = Event.find_by_name params[:search]
     end
-
   end
 
   def publish
