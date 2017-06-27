@@ -38,7 +38,7 @@ class EventsController < ApplicationController
 
   def new
 
-    @categories = Event.all
+    @categories = Category.all
     @venues = Venue.all
   end
 
