@@ -16,7 +16,7 @@ class Event < ActiveRecord::Base
   end
 
   def check_publish?
-    self.ticket_types.length > 0
+    self.publish
   end
 
   def publish_event

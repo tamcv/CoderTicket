@@ -59,7 +59,10 @@ class EventsController < ApplicationController
   end
 
   def check_event_changing_permission
-    
+    if current_user.id != Event.find(params[:id]).user_id
+      flash[:error] = "Permissions denied! You cannot edit this event!"
+      redirect_to event_path(id: params[:id])
+    end
   end
 
   private
