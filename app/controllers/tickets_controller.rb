@@ -1,6 +1,10 @@
 class TicketsController < ApplicationController
   def new
     @event = Event.find(params[:event_id])
+    if DateTime.now >= @event.starts_at
+      flash[:error] = "The event is not available to buy ticket now!"
+      redirect_to root_path
+    end
     @ticket_types = @event.ticket_types
     @ticket = Ticket.new
   end
