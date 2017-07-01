@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'root' => 'events#index'
   get 'venues/new'
 
   get 'venue/new'

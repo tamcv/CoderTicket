@@ -34,7 +34,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.1.0'
 end
 
-gem 'bootstrap', '~> 4.0.0.alpha5'
+gem 'bootstrap', git: 'https://github.com/twbs/bootstrap-rubygem'
 gem 'simple_form'
 gem 'better_errors', group: :development
 gem 'font-awesome-rails'
