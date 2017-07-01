@@ -11,7 +11,7 @@ class EventsController < ApplicationController
 
   def publish
     @event = Event.find(params[:event_id])
-    if @event.check_publish?
+    if @event.check_number_ticket_types?
       @event.publish_event
       redirect_to root_path
     else
@@ -51,6 +51,8 @@ class EventsController < ApplicationController
   
   def show
     @event = Event.find(params[:id])
+    @related_events = @event.find_relation
+
   end
 
   def new

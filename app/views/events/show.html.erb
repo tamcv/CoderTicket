@@ -53,6 +53,13 @@
         </div>
 
       </div>
+      <br>
       <%= link_to "Edit", edit_event_path(id: params[:id]), class: "btn btn-info show"%>
+      <br>
+      <% @related_events.each do |related_event|%>
+        <% if related_event.id != @event.id %>
+          <%= link_to related_event.name, event_path(id: related_event.id), class: "btn btn-secondary" %>
+        <% end %>
+      <% end %>
     </div>
 </div>

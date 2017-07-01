@@ -18,18 +18,20 @@ RSpec.describe Event, type: :model do
 
   it 'check_publish is false' do
     a = FactoryGirl.create(:event, publish: false)
-    expect(a.check_publish?).to be false
+    expect(a.check_number_ticket_types?).to be false
   end
 
-  it 'check_publish is true' do
-    a = FactoryGirl.create(:event, publish: true)
-    expect(a.check_publish?).to be true
+  it 'check_number_ticket_types is true' do
+    a = FactoryGirl.create(:event, publish: false)
+    b = FactoryGirl.create(:ticket_type, event_id: a.id )
+    expect(a.check_number_ticket_types?).to be true
   end
 
   it 'publish_event method' do
     a = FactoryGirl.create(:event, publish: false)
+    b = FactoryGirl.create(:ticket_type, event_id: a.id )
     a.publish_event
-    expect(a.check_publish?).to eq(true)
+    expect(a.publish).to eq(true)
   end
 
 end

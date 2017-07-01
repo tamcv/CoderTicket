@@ -15,12 +15,17 @@ class Event < ActiveRecord::Base
     starts_at > Time.now && self.publish
   end
 
-  def check_publish?
-    self.publish
+  def check_number_ticket_types?
+    self.ticket_types.length > 0
   end
 
   def publish_event
     self.publish= true
     save!
   end
+
+  def find_relation
+    Event.where({category_id: self.category_id}).joins(:venue).where("venues.region_id = #{self.venue.region_id}")
+  end
+
 end
