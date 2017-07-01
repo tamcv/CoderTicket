@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   root 'events#index'
   get 'login' => 'sessions#new'
   delete 'logout' => 'sessions#destroy'
+  match '/auth/:provider/callback', to:'sessions#facebook', via: [:get, :post]
+  match '/auth/failure', to: 'sessions#failure', via: [:get, :post]
   resources :events do
     collection do
       get 'mines' => 'events#event_list'

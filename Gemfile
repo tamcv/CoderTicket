@@ -56,6 +56,8 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'capybara'
   gem 'faker'
+  #gem 'omniauth'
+  gem 'omniauth-facebook'
 end
 
 group :development do

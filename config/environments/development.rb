@@ -43,4 +43,17 @@ Rails.application.configure do
   # For Vagrant box
   config.web_console.whitelisted_ips = '0.0.0.0/0'
   config.web_console.whiny_requests = false
+
+  config.action_mailer.delivery_method = :smtp
+  # SMTP settings for gmail
+  ActionMailer::Base.smtp_settings = {
+    address:              'smtp.gmail.com',
+    port:                 587,
+    domain:               'gmail.com',
+    user_name:            'testrubyclass1@gmail.com',
+    password:             'testrubyclass1@',
+    authentication:       :plain,
+    enable_starttls_auto: true
+  }
+
 end

@@ -11,8 +11,10 @@ class TicketsController < ApplicationController
 
   def create
     @ticket = Ticket.new(ticket_params)
+    @event = Event.find(params[:event_id])
     if @ticket.save
       flash[:success] = "Sussessul register ticket"
+      UserMailer.purchase_mail(current_user.email, @ticket, @event).deliver
       redirect_to root_path
     else
       flash.now[:danger] = "Fail to register ticket"
