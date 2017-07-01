@@ -21,11 +21,12 @@ class EventsController < ApplicationController
   end
 
   def event_list
-    @events = current_user.events
+    @events = Event.where("#{current_user.id} = ANY(admin_list)")
   end
 
   def create
     @event = current_user.events.new(event_params)
+    @event.admin_list << @current_user.id
     if @event.save
       redirect_to root_path
     else
@@ -61,10 +62,46 @@ class EventsController < ApplicationController
   end
 
   def check_event_changing_permission
-    if current_user.id != Event.find(params[:id]).user_id
+    unless Event.find(params[:id]).admin_list.include? current_user.id
       flash[:error] = "Permissions denied! You cannot edit this event!"
       redirect_to event_path(id: params[:id])
     end
+  end
+
+  def admins
+    @event = Event.find(params[:id])
+    @admin_list = User.where(id: @event.admin_list)
+    @candidates = User.where.not(id: @event.user_id)
+  end
+
+  def destroy_admin
+    event = Event.find(params[:id])
+    user_id = params[:user_id].to_i
+    event.admin_list.delete(params[:user_id])
+    if event.user_id != user_id
+      if event.save
+        flash[:success] = "Removed #{User.find(user_id).full_name} from admin list"
+      else
+        flash[:error] = "Failed to remove #{User.find(user_id).full_name} from admin list"
+      end
+    else
+      flash[:error] = "#{User.find(user_id).full_name} is owner, can not remove from admin list"
+    end
+    redirect_to admins_events_path(id: params[:id])
+  end
+  
+  def add_admin
+    @event = Event.find(params[:id])
+    user_id = params[:candidate].to_i
+    if user_id and ! @event.admin_list.include? user_id
+      @event.admin_list << user_id
+      if @event.save
+        flash[:success] = "Added #{User.find(user_id).full_name} to admin list"
+      else
+        flash[:error] = "Failed to add #{User.find(user_id).full_name} to admin list"
+      end
+    end
+    redirect_to admins_events_path(id: params[:id])
   end
 
   private

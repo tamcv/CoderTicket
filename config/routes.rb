@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     collection do
       get 'mines' => 'events#event_list'
       post 'publish' => 'events#publish'
+      get 'admins' => 'events#admins'
+      post 'add_admin' => 'events#add_admin'
     end
     resources :tickets
   end
