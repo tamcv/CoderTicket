@@ -45,7 +45,7 @@
         </br>
         <%= text_field_tag :address, nil, placeholder: "Address", class: "form-control" %>
         </br>
-        <%= select_tag :count, options_for_select(0..10), class: "form-control" %>
+        <%= number_field_tag :count, nil, class: "form-control" %>
         </br>
         <%= select_tag(:ticket_type_id, options_from_collection_for_select(@ticket_types, "id", "name"), class: "form-control") %>
         </br>

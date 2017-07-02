@@ -10,18 +10,28 @@ class TicketsController < ApplicationController
   end
 
   def create
-    @ticket = Ticket.new(ticket_params)
-    @event = Event.find(params[:event_id])
-    if @ticket.save
-      flash[:success] = "Sussessul register ticket"
-      UserMailer.purchase_mail(current_user.email, @ticket, @event).deliver
-      redirect_to root_path
+    if current_user.present?
+      @ticket = Ticket.new(ticket_params)
+      @event = Event.find(params[:event_id])
+      if @ticket.count <= @ticket.ticket_type.ticket_count
+        if @ticket.save
+          flash[:success] = "Sussessul register ticket"
+          UserMailer.purchase_mail(current_user.email, @ticket, @event).deliver
+          redirect_to root_path
+        else
+          flash.now[:danger] = "Fail to register ticket"
+          ticket_type = TicketType.find(params[:ticket][:ticket_type_id])
+          @event = Event.find(ticket_type.event_id)
+          @ticket_types = @event.ticket_types
+          redirect_to new_event_ticket_path(@event)
+        end
+      else
+        flash[:danger] = "Not enough tickets"
+        redirect_to new_event_ticket_path(@event)
+      end
     else
-      flash.now[:danger] = "Fail to register ticket"
-      ticket_type = TicketType.find(params[:ticket][:ticket_type_id])
-      @event = Event.find(ticket_type.event_id)
-      @ticket_types = @event.ticket_types
-      render 'new'
+      flash.now[:danger] = "Please login before buying ticket"
+      redirect_to login_path
     end
   end
 

@@ -34,7 +34,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.1.0'
 end
 
-gem 'bootstrap', git: 'https://github.com/twbs/bootstrap-rubygem'
+gem 'bootstrap', '~> 4.0.0.alpha5'
 gem 'simple_form'
 gem 'better_errors', group: :development
 gem 'font-awesome-rails'
@@ -56,8 +56,9 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'capybara'
   gem 'faker'
-  #gem 'omniauth'
+  gem 'omniauth'
   gem 'omniauth-facebook'
+  gem 'seed_dump'
 end
 
 group :development do

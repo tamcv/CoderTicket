@@ -5,7 +5,7 @@ class TicketType < ActiveRecord::Base
 
   def ticket_count
     if !tickets.map(&:count).blank?
-      max_quantity- tickets.map(&:count).reduce(:+)
+      max_quantity - tickets.map(&:count).reduce(:+)
     else
       max_quantity
     end

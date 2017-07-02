@@ -47,14 +47,13 @@
         <div class="extended-description">
           <%= @event.extended_html_description.html_safe %>
         </div>
-
-      </div>
-      <br>
-      <br>
-      <% @related_events.each do |related_event|%>
-        <% if related_event.id != @event.id %>
-          <%= link_to related_event.name, event_path(id: related_event.id), class: "btn btn-secondary" %>
+        <br>
+        <br>
+        <% @related_events.each do |related_event|%>
+          <% if related_event.id != @event.id %>
+            <%= link_to related_event.name, event_path(id: related_event.id), class: "btn btn-secondary" %>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
     </div>
 </div>

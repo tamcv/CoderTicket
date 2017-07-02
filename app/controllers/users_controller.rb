@@ -10,10 +10,11 @@ class UsersController < ApplicationController
     if @user.save!
 
       session[:user_id] = @user.id
+      flash[:success] = "Welcome @user.full_name!"
       redirect_to root_path
     else
-
-      redirect_to new_user_path
+      flash[:error] = "Failed to register new account"
+      render 'new'
     end
   end
 

@@ -14,12 +14,6 @@ class SessionsController < ApplicationController
     end
   end
 
-  def facebook
-    auth_hash = request.env['omniauth.auth']
-   
-    print auth_hash.inspect
-  end
-
   def destroy
     session[:user_id] = nil
     redirect_to login_path
