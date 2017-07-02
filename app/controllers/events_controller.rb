@@ -2,10 +2,10 @@ class EventsController < ApplicationController
   before_action :check_event_changing_permission, only: [:edit]
 
   def index
-    if params[:search].nil? || params[:search].blank?
-      @events = Event.upcoming
+    if params[:search].present?
+      @events = Event.search(params[:search])
     else
-      @events = Event.find_by_name params[:search]
+      @events = Event.upcoming
     end
   end
 

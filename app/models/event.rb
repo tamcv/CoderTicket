@@ -28,4 +28,8 @@ class Event < ActiveRecord::Base
     Event.where({category_id: self.category_id}).joins(:venue).where("venues.region_id = #{self.venue.region_id}")
   end
 
+  def self.search(search)
+    where("name ILIKE ?", "%#{search}%") 
+  end
+
 end
